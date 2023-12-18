@@ -27,6 +27,9 @@
         <c:if test="${requestScope.error != null}">
             <p>${requestScope.error}</p>
         </c:if>
+        <c:if test="${sessionScope.error != null}">
+            <p>${sessionScope.error}</p>
+        </c:if>
         <input type="submit" value="confirm">
     </form>
 </body>

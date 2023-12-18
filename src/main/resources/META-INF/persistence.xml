@@ -8,6 +8,7 @@
         <class>int202.prefinalint202.entities.Office</class>
         <class>int202.prefinalint202.entities.Employee</class>
         <class>int202.prefinalint202.entities.Customer</class>
+        <class>int202.prefinalint202.entities.Product</class>
         <properties>
             <property name="jakarta.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>
             <property name="jakarta.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/classicmodels"/>

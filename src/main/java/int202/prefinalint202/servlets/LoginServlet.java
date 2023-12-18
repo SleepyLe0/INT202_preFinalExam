@@ -16,10 +16,11 @@ public class LoginServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String action = request.getParameter("action") == null ? "" : request.getParameter("action");
         if (action.equalsIgnoreCase("logout")) {
-            request.getSession().setAttribute("currentUser", null);
-            response.sendRedirect("../index.jsp");
+            HttpSession session = request.getSession(false);
+            session.setAttribute("currentUser", null);
+            response.sendRedirect("../");
         } else {
-            request.getRequestDispatcher("/login.jsp").forward(request, response);
+            request.getRequestDispatcher("../login.jsp").forward(request, response);
         }
     }
 
@@ -27,19 +28,24 @@ public class LoginServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String userName = request.getParameter("userName");
         String password = request.getParameter("password");
+        HttpSession session = request.getSession();
         CustomerRepository customerRepository = new CustomerRepository();
         Customer currentUser = customerRepository.findByUserName(userName);
         if (currentUser == null) {
             request.setAttribute("error", "wrong username");
+            session.setAttribute("error", null);
             doGet(request, response);
         } else {
             Argon2 argon2 = Argon2Factory.create(Argon2Factory.Argon2Types.ARGON2d, 16, 16);
             char[] passwordArray = password.toCharArray();
-            if (argon2.verify(currentUser.getPassword(), passwordArray)) {
-                request.getSession().setAttribute("currentUser", currentUser);
-                response.sendRedirect("../index.jsp");
+            boolean isCorrect = argon2.verify(currentUser.getPassword(), passwordArray);
+            if (isCorrect) {
+                session.setAttribute("currentUser", currentUser);
+                session.setAttribute("error", null);
+                response.sendRedirect("../");
             } else {
                 request.setAttribute("error", "wrong password");
+                session.setAttribute("error", null);
                 doGet(request, response);
             }
         }

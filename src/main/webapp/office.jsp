@@ -21,5 +21,6 @@
             <p>${office.addressLine2}</p>
         </div>
     </c:forEach>
+    <a href="${pageContext.request.contextPath}/005/office?back=1">back</a>
 </body>
 </html>
