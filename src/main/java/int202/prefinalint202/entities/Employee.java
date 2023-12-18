@@ -10,6 +10,10 @@ import lombok.ToString;
 @ToString
 @Entity
 @Table(name = "employees")
+@NamedQueries({
+        @NamedQuery(name = "EMPLOYEE.FIND_ALL",
+                query = "select e from Employee e"),
+})
 
 public class Employee {
     @Id

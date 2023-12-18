@@ -15,7 +15,7 @@ public class OfficeServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String back = request.getParameter("back") == null ? "" : request.getParameter("back");
         if (back.equalsIgnoreCase("1")) {
-            doPost(request, response);
+            response.sendRedirect("../");
         } else {
             OfficeRepositoy officeRepositoy = new OfficeRepositoy();
             List<Office> officeList = officeRepositoy.findAll();
@@ -26,6 +26,6 @@ public class OfficeServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        response.sendRedirect("../");
+
     }
 }

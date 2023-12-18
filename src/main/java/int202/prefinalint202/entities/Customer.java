@@ -1,12 +1,12 @@
 package int202.prefinalint202.entities;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 @Getter
 @Setter
+@NoArgsConstructor
+@AllArgsConstructor
 @ToString
 @Entity
 @Table(name = "customers")
@@ -30,7 +30,7 @@ public class Customer {
     private String state;
     private String postalCode;
     private String country;
-    private String salesRepEmployeeNumber;
-    private String creditLimit;
+    private Integer salesRepEmployeeNumber;
+    private Double creditLimit;
     private String password;
 }

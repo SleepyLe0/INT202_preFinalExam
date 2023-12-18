@@ -9,7 +9,7 @@ import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 
-@WebFilter(filterName = "AuthenticationFilter", servletNames = "OfficeServlet")
+@WebFilter(filterName = "AuthenticationFilter", servletNames = {"OfficeServlet", "CustomerServlet"})
 public class AuthenticationFilter implements Filter {
 
     @Override
